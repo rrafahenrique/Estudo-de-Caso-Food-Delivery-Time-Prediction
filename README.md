@@ -1,10 +1,10 @@
-![Badge de Concluido](https://img.shields.io/badge/status-Em Andamento-orange?style=for-the-badge)
+![Badge de Concluido](https://img.shields.io/badge/status-Em-Andamento-orange?style=for-the-badge)
 
 # Previsão do tempo de entrega de alimentos: Estudo de Caso
 A previsão do tempo de entrega de comida é um aspecto crucial do setor de entregas de alimentos. **Previsões** precisas ajudam a **melhorar a satisfação do cliente, otimizar as operações de entrega e reduzir o tempo de espera**. Aqui está um estudo de caso que descreve as etapas envolvidas na construção de um modelo de previsão do tempo de entrega de comida,
 
-> [!NOTE] Nota 
-> Este estudo de caso está no site do **Kaggle** -  [Food Delivery Time Prediction: Case Study](https://www.kaggle.com/datasets/bhanupratapbiswas/food-delivery-time-prediction-case-study/)
+> [!NOTE]
+> Este estudo de caso está no site do **Kaggle** - [Food Delivery Time Prediction: Case Study](https://www.kaggle.com/datasets/bhanupratapbiswas/food-delivery-time-prediction-case-study/)
 
 # Problema de negócio:
 Uma popular empresa de entrega de comida quer aprimorar a experiência do cliente fornecendo estimativas precisas do tempo de entrega. Ela recebe um número significativo de pedidos diariamente, e os clientes frequentemente reclamam de atrasos nas entregas. A empresa pretende construir um modelo de aprendizado de máquina que possa prever o tempo de entrega com base em diversos fatores, a fim de minimizar os atrasos e melhorar a satisfação geral do cliente.
@@ -30,7 +30,7 @@ Os dados foram divididos em conjuntos de treinamento e teste para treinar os mod
 # Ajuste do modelo com Optuna:
 Foi realizado um ajuste de hiperparâmetros para otimizar o desempenho dos modelos que tiveram melhor resultado. 
 
-> [!attention]
+> [!IMPORTANT]
 > Neste projeto foi usado a biblioteca `plotly.express` para gerar mapas iterativos com a localização dos restaurantes e locais de entrega.
 > ![alt text](img/Mapa.png)
 >
