@@ -1,4 +1,4 @@
-![Badge de Concluido](https://img.shields.io/badge/status-Em_Andamento-orange?style=for-the-badge)
+![Badge de Concluido](https://img.shields.io/badge/status-Concluído-green?style=for-the-badge)
 
 # Previsão do tempo de entrega de alimentos: Estudo de Caso
 A previsão do tempo de entrega de comida é um aspecto crucial do setor de entregas de alimentos. **Previsões** precisas ajudam a **melhorar a satisfação do cliente, otimizar as operações de entrega e reduzir o tempo de espera**. Aqui está um estudo de caso que descreve as etapas envolvidas na construção de um modelo de previsão do tempo de entrega de comida.
