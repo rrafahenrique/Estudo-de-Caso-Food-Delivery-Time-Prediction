@@ -34,7 +34,7 @@ Este estudo de caso foi dividido em duas partes:
 > O código-fonte está disponível em: [PARTE II.ipynb](https://github.com/rrafahenrique/Estudo-de-Caso-Food-Delivery-Time-Prediction/blob/master/PARTE%20II.ipynb)
 
 > [!IMPORTANT]
-> Neste projeto foi usado a biblioteca `plotly.express` para gerar mapas iterativos com a localização dos restaurantes e locais de entrega.
+> Na [PARTE I.ipynb](https://github.com/rrafahenrique/Estudo-de-Caso-Food-Delivery-Time-Prediction/blob/master/PARTE%20I.ipynb), seção "2. Tratamento dos Dados" para ilustatr a localização dos restaurantes e locais de entrega foi usada a biblioteca `plotly.express` para gerar mapas iterativos. 
 > ![alt text](img/Mapa.png)
 >
 > Entretanto, o Github não consegui exibir de forma correta essa informação, é altamente recomendado que este projeto seja executado no seu próprio computador. 
