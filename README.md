@@ -9,7 +9,7 @@ A previsão do tempo de entrega de comida é um aspecto crucial do setor de entr
 # Problema de negócio:
 Uma popular empresa de entrega de comida quer aprimorar a experiência do cliente fornecendo estimativas precisas do tempo de entrega. Ela recebe um número significativo de pedidos diariamente, e os clientes frequentemente reclamam de atrasos nas entregas. A empresa pretende construir um modelo de aprendizado de máquina que possa prever o tempo de entrega com base em diversos fatores, a fim de minimizar os atrasos e melhorar a satisfação geral do cliente.
 
-# Plano de Ação
+# Estrutura do Projeto
 Este estudo de caso foi dividido em duas partes:
 1. **Parte I**: Essa etapa foi realizada o pré-processamento ddos dados:
     O pré-processamento de dados é essencial para garantir que os dados sejam adequados para a modelagem. Esta fase envolve:

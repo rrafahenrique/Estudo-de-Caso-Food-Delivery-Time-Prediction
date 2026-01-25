@@ -170,6 +170,8 @@ def plot_delivery_age_analysis(
 def plot_proportion_bar(
     df: pd.DataFrame,
     column: str,
+    title: str,
+    xlabel: str,
     show_values: bool = True,
     palette: List[str] = ['#151F30', '#103778', '#0593A2', '#FF7A48', '#E3371E']
 ) -> pd.Series:
@@ -205,8 +207,8 @@ def plot_proportion_bar(
         color=palette[:len(proportions)]
     )
 
-    plt.title('Média dos Pedidos', fontsize=14, fontweight='bold')
-    plt.xlabel('Tipo de Pedido', fontsize=14)
+    plt.title(title, fontsize=14, fontweight='bold')
+    plt.xlabel(xlabel, fontsize=14)
     plt.ylabel('Proporção (%)', fontsize=14)
 
     plt.grid(axis='y', linestyle='--', alpha=0.6)
@@ -226,69 +228,6 @@ def plot_proportion_bar(
 
     plt.show()
 #-------------------------------------------------------------------------------
-def plot_categoria_percentual_barh(
-    df,
-    col_categoria
-):
-    """
-    Plota um gráfico de barras horizontais com percentual e rótulos de texto.
-
-    Parâmetros:
-    - df (pd.DataFrame): DataFrame com os dados
-    - col_categoria (str): coluna categórica
-    - titulo (str): título do gráfico
-    - xlabel (str): rótulo do eixo X
-    - ylabel (str): rótulo do eixo Y
-    - colors (list): lista de cores
-    - figsize (tuple): tamanho da figura
-    - show (bool): se True, exibe o gráfico
-
-    Retorno:
-    - fig, ax
-    """
-
-    # Cálculo do percentual
-    df_percentual = df[col_categoria].value_counts(normalize=True) * 100
-
-    # Estilo
-    plt.style.use('ggplot')
-
-    # Figura
-    fig, ax = plt.subplots(figsize=(8, 4))
-
-    # Plot
-    ax = df_percentual.plot(
-        kind='barh',
-        color=['#151F30', '#103778', '#0593A2', '#FF7A48', '#E3371E'],
-        ax=ax
-    )
-
-    # Labels e título
-    ax.set_title('Média por Tipo de Veículo Usado', fontsize=14, pad=10)
-    ax.set_xlabel('Percentual %')
-    ax.set_ylabel('Categoria')
-
-    # Grid
-    ax.grid(axis='y', linestyle='--', alpha=0.5)
-
-    # Adiciona rótulos de percentual
-    for p in ax.patches:
-        width = p.get_width()
-        y = p.get_y() + p.get_height() / 2
-
-        ax.text(
-            width + 0.10,
-            y,
-            f'{width:.2f}%',
-            va='center',
-            ha='left',
-            fontsize=10,
-            color='black'
-        )
-
-    plt.tight_layout()
-    plt.show()
-#-----------------------------------------------------------------------------
 def plot_rating_categoria_analise(
     df,
     col_categoria: str,
