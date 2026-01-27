@@ -20,7 +20,7 @@ Este estudo de caso foi dividido em duas partes:
 
 > O código-fonte está disponível em: [PARTE I.ipynb](https://github.com/rrafahenrique/Estudo-de-Caso-Food-Delivery-Time-Prediction/blob/master/PARTE%20I.ipynb)
 
-2. **Parte II**: Os dados foram divididos em conjuntos de treinamento e teste para treinar os modelos. Os modelos são avaliados usando métricas como Erro Médio Absoluto (MAE) ou Raiz do Erro Quadrático Médio (RMSE) para medir o quão bem os tempos de entrega previstos correspondem aos tempos de entrega reais.
+2. **Parte II**: Os dados foram divididos em conjuntos de treinamento e teste para treinar os modelos. Os modelos foram avaliados usando métricas como MAE (Mean Absolute Error)*, MSE (Mean Squared Error), R² (Coeficiente de Determinação) e MAPE (Mean Absolute Percentage Error) para medir o quão bem os tempos de entrega previstos correspondem aos tempos de entrega reais.
 
     Neste projeto foram utilizados 5 modelos de regressão para prever o tempo de entrega com base nos dados pré-processados.
     - Linaer Regression
@@ -29,7 +29,7 @@ Este estudo de caso foi dividido em duas partes:
     - XGBoost
     - CatBoost
 
-    Foi realizado um ajuste de hiperparâmetros para otimizar o desempenho dos modelos que tiveram melhor resultado. 
+    Foi realizado um ajuste de hiperparâmetros com Optuna para otimizar o desempenho dos modelos que tiveram melhor resultado. 
 
 > O código-fonte está disponível em: [PARTE II.ipynb](https://github.com/rrafahenrique/Estudo-de-Caso-Food-Delivery-Time-Prediction/blob/master/PARTE%20II.ipynb)
 

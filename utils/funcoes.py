@@ -245,15 +245,11 @@ def plot_rating_categoria_analise(
     - Um gráfico centralizado na segunda linha
     """
 
-    # =========================
     # Preparação dos dados
-    # =========================
     cont_percen = df[col_categoria].value_counts(normalize=True) * 100
     rating_groups = df.groupby(col_categoria)[col_tempo]
 
-    # =========================
     # Layout com GridSpec
-    # =========================
     fig = plt.figure(figsize=(14, 10))
     gs = fig.add_gridspec(2, 2, height_ratios=[1, 1.1])
 
@@ -261,9 +257,7 @@ def plot_rating_categoria_analise(
     ax2 = fig.add_subplot(gs[0, 1])   # Topo direita
     ax3 = fig.add_subplot(gs[1, :])   # Segunda linha (centralizado)
 
-    # =========================
     # Gráfico 1 — Barras (%)
-    # =========================
     cont_percen.plot(
         kind='bar',
         color=['#151F30', '#103778', '#0593A2', '#FF7A48', '#E3371E'],
@@ -285,9 +279,7 @@ def plot_rating_categoria_analise(
             fontweight='bold'
         )
 
-    # =========================
     # Gráfico 2 — Histograma
-    # =========================
     sns.histplot(
         df[col_rating],
         kde=True,
@@ -300,9 +292,7 @@ def plot_rating_categoria_analise(
     ax2.set_xlabel('Ratings')
     ax2.set_ylabel('Frequência')
 
-    # =========================
     # Gráfico 3 — KDE por categoria
-    # =========================
     cores = ['#151F30', '#103778', '#0593A2', '#FF7A48']
 
     for (group, values), cor in zip(rating_groups, cores):
