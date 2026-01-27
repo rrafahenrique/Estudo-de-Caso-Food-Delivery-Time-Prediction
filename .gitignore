@@ -1,3 +1,9 @@
+# Ambiente Virtual
 venv/
 .venv/
+
+# Python
 __pycache__
+
+# CatBoost
+catboost_info/
