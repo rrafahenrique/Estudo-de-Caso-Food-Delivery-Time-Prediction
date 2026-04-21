@@ -1,13 +1,10 @@
 import pandas as pd
-import numpy as np
+import seaborn as sns
 import matplotlib.pyplot as plt
 import plotly.express as px
-import seaborn as sns
-from typing import List
 
-# Função que personaliza o método describe() do pandas 
 # É necessário instalar o pacote jinja2 (pip install jinja2)
-def descricão(df):
+def df_summary_report(df):
     """
     Descreve valores estatísticos da dataframe.
 
@@ -20,39 +17,70 @@ def descricão(df):
     pd.Series
         Valores estatísticos e quantitativos estilizados.
     """
+
+    moda = df.mode().iloc[0]
+
+    mem_consumo = df.memory_usage(deep=True, index=False)/1024**2
+    total = sum(mem_consumo)
+
+    freq = df.apply(
+        lambda col: col.value_counts(dropna=True).iloc[0]
+        if not col.dropna().empty else None
+    )
+
     resumo = pd.DataFrame({
-        'Coluna': df.columns,
-        'Tipo': df.dtypes.values,
-        'Quantidade de Dados Não Vazios': df.notna().sum().values,
-        'Quantidade de Dados Vazios': df.isna().sum().values,
-        'Valores Únicos': df.nunique(),
-        'Porcentagem de Valor Vazios (%)': (df.isna().mean() * 100).round(2).values
-        
-    })
+        'Coluna': df.columns,            #Lista os nomes das colunas do DataFrame.
+        'Tipo': df.dtypes.values,        #Retorna o tipo de dado (dtype) de cada coluna.
+        'Quantidade de Dados Não Vazios': df.notna().sum().values,  #Conta a quantidade de valores não nulos por coluna.
+        'Quantidade de Dados Vazios': df.isna().sum().values,       #Conta a quantidade de valores nulos (NaN) por coluna.
+        'Valores Únicos': df.nunique().values,       #Conta a quantidade de valores únicos de cada coluna
+        'Valor mais Frequente': moda,    #Calcula a moda de cada coluna    
+        'Frequência': freq,               #Mostra a frequência da moda
+        'Porcentagem de Unicidade': ((df.nunique() / len(df)) * 100).round(2).values,    #Cardinalidade - baixa cardinalidade indica alta repetição; alta cardinalidade indica baixa repetição
+        'Porcentagem de Valor Vazios (%)': (df.isna().mean() * 100).round(2).values,  #Calcula a porcentagem de valores nulos por coluna.
+        f'Consumo de Memória - Total: {total:.2f} (MB)': mem_consumo    #Calcula a quantidade de memória usada pelo dataset
+    }).reset_index(drop=True)
+
+    #colormaps
+    cmap_vazios = sns.light_palette("#BD2A2E", as_cmap=True)
+    cmap_unicidade = sns.light_palette("#13678A", as_cmap=True)
+    cmap_unique = sns.light_palette("#1f77b4", as_cmap=True)
+    cmap_freq = sns.light_palette("#13678A", as_cmap=True)
 
     styled = (resumo.style
         .set_properties(**{
-            'background-color': "#0f010194", 
-            'border-color': 'black',
+            'background-color': "#101719",
+            'color': '#E0E0E0',  
+            'border': '1px solid #2F3D40',
             'text-align': 'center'
         })
-        .background_gradient(subset=['Porcentagem de Valor Vazios (%)'], cmap='Reds')
-        .bar(subset=['Quantidade de Dados Vazios'], color='#BE0804')
-        .set_table_styles([
-            {
+        .background_gradient(subset=['Porcentagem de Valor Vazios (%)'], cmap=cmap_vazios, vmin=0, vmax=100)
+        .background_gradient(subset=['Porcentagem de Unicidade'], cmap=cmap_unicidade, vmin=0, vmax=100)
+        .background_gradient(subset=["Valores Únicos"],cmap=cmap_unique)
+        .background_gradient(subset=["Frequência"],cmap=cmap_freq)
+        .background_gradient(subset=[f"Consumo de Memória - Total: {total:.2f} (MB)"], cmap=cmap_freq)
+        .bar(subset=['Quantidade de Dados Vazios'], color="#BD2A2E")
+        .format({'Porcentagem de Valor Vazios (%)': '{:.2f}', 'Porcentagem de Unicidade': '{:.2f}'})
+        .set_table_styles([{
                 'selector': 'th',
                 'props': [
-                    ('background-color', '#0d253f'),
+                    ('background-color', "#0c2845"),
                     ('color', 'white'),
                     ('text-align', 'center'),
-                    ('font-size', '12px')
+                    ('font-size', '13px')
                 ]
             }
         ])
+        .set_properties(
+            subset=pd.IndexSlice[:, resumo.columns[0]],**{
+                'background-color': '#012030',
+                'font-weight': 'bold',
+                'color': '#FFFFFF'
+            })
+        
     )
     return styled
-#-----------------------------------------------------------------------------------------
-
+#----------------------------------------------------------------------------------------------------------------------
 def plot_origem_destino_map(
     df,
     lat_origem,
@@ -103,17 +131,13 @@ def plot_origem_destino_map(
     )
 
     fig.update_layout(
-        map_style = "open-street-map",
+        map_style = "carto-positron",
         margin = {"r": 0, "t": 0, "b": 0, "l": 0}
     )
 
     fig.show()
-#---------------------------------------------------------------------------
-def plot_delivery_age_analysis(
-    df,
-    col_rating: str,
-    col_age: str
-):
+#--------------------------------------------------------------------------------------
+def plot_delivery_age_analysis(df, col_rating, col_age):
     """
     Plota:
     1) Mediana da idade dos entregadores por rating
@@ -165,16 +189,8 @@ def plot_delivery_age_analysis(
 
     plt.tight_layout()
     plt.show()
-
-#----------------------------------------------------------------------------
-def plot_proportion_bar(
-    df: pd.DataFrame,
-    column: str,
-    title: str,
-    xlabel: str,
-    show_values: bool = True,
-    palette: List[str] = ['#151F30', '#103778', '#0593A2', '#FF7A48', '#E3371E']
-) -> pd.Series:
+#-------------------------------------------------------------------------
+def plot_proportion_bar(df, column, title, xlabel):
     """
     Plota um gráfico de barras com a proporção percentual de uma variável categórica.
 
@@ -184,16 +200,18 @@ def plot_proportion_bar(
         DataFrame de entrada.
     column : str
         Coluna categórica a ser analisada.
-    show_values : bool, opcional
-        Exibe os valores percentuais acima das barras.
-    palette : list, opcional
-        Lista de cores para o gráfico.
+    title : str
+        Título do Grafico
+    xlabel : str
+        Label do eixo x
 
     Retorno
     -------
     pd.Series
         Série com as proporções (%) por categoria.
     """
+    
+    palette = ['#151F30', '#103778', '#0593A2', '#FF7A48', '#E3371E']
 
     # Cálculo da proporção
     proportions = df[column].value_counts(normalize=True) * 100
@@ -215,25 +233,19 @@ def plot_proportion_bar(
     plt.tight_layout()
 
     # Valores acima das barras
-    if show_values:
-        for i, valor in enumerate(proportions.values):
-            plt.text(
-                i,
-                valor + 0.3,
-                f'{valor:.2f}%',
-                ha='center',
-                fontsize=10,
-                fontweight='bold'
-            )
+    for i, valor in enumerate(proportions.values):
+        plt.text(
+            i,
+            valor + 0.3,
+            f'{valor:.2f}%',
+            ha='center',
+            fontsize=10,
+            fontweight='bold'
+        )
 
     plt.show()
-#-------------------------------------------------------------------------------
-def plot_rating_categoria_analise(
-    df,
-    col_categoria: str,
-    col_rating: str,
-    col_tempo: str
-):
+#------------------------------------------------------------------------------
+def plot_rating_categoria_analise(df, col_categoria, col_rating, col_tempo):
     """
     Cria três gráficos:
     1) Distribuição percentual por categoria (barra)
@@ -311,7 +323,3 @@ def plot_rating_categoria_analise(
 
     plt.tight_layout()
     plt.show()
-
-
-
-

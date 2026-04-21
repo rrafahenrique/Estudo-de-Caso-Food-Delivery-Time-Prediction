@@ -1,8 +1,6 @@
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 import numpy as np
-from typing import Dict
+
 import optuna
 
 import warnings
@@ -19,20 +17,14 @@ import logging
 # Opcional: Define o nível de log para CRITICAL para garantir que nada seja exibido
 optuna.logging.set_verbosity(logging.CRITICAL)
 
-def train_and_compare_models(
-    X_train: pd.DataFrame,
-    X_test: pd.DataFrame,
-    y_train: pd.Series,
-    y_test: pd.Series,
-    random_state: int = 42        
-):
+def train_and_compare_models(X_train, X_test, y_train, y_test, random_state = 42):
     """
     Treina e avalia múltiplos modelos de Regressão,
     retornando as métricas de avaliação.
     """   
 
     #Modelos
-    models: Dict[str, object] = {
+    models = {
         "Regressão Linear": LinearRegression(),
         "LightGBM": lgb.LGBMRegressor(random_state=random_state, verbosity=-1),
         "Random Forest Regressor": RandomForestRegressor(random_state=random_state),
@@ -87,15 +79,7 @@ def regression_metrics(nome_modelo, y_test, y_pred, X_test):
     }
 
 #--------------------------------------------------------------------------------------------
-def optuna_regression(
-    X_train,
-    y_train,
-    X_test,
-    y_test,
-    modelo="catboost",
-    n_trials=50,
-    random_state=42
-):
+def optuna_regression(X_train, y_train, X_test, y_test, modelo="catboost", n_trials=50, random_state=42):
     """
     modelo: 'catboost' ou 'lightgbm'
     """
