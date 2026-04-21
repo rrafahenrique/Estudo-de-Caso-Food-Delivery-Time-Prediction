@@ -1,4 +1,4 @@
-![Badge de Concluido](https://img.shields.io/badge/status-Concluído-green?style=for-the-badge)
+![Badge-Concluido](https://img.shields.io/badge/Status-Conluído-green) ![Bagde-Version](https://img.shields.io/badge/Version-2.0-blue)
 
 # Previsão do tempo de entrega de alimentos: Estudo de Caso
 A previsão do tempo de entrega de comida é um aspecto crucial do setor de entregas de alimentos. **Previsões** precisas ajudam a **melhorar a satisfação do cliente, otimizar as operações de entrega e reduzir o tempo de espera**. Aqui está um estudo de caso que descreve as etapas envolvidas na construção de um modelo de previsão do tempo de entrega de comida.
@@ -12,24 +12,6 @@ Uma popular empresa de entrega de comida quer aprimorar a experiência do client
 # Estrutura do Projeto
 Inicialmente foi analisado o dataset, suas variáveis e tipagem das colunas, depois foi realizado o pré-processamento de dados etapa essencial para garantir que os dados sejam adequados para a modelagem. Esta fase envolveu:
 - **Tratamento dos Dados**: estudo sobre os dados discrepantes fornecidos sobre latitude e longitude;
-- **Análise Exploratória**: análise dos dados para extração de insights de negócios;
-- **Feature Engineering***: Criação de novas funcionalidades que podem melhorar o desempenho do modelo, como distância entre locais, avaliação dos entregadores e etc.
-- **Codificação de variáveis ​​categóricas**: Converter características categóricas em formato numérico usando técnicas como codificação one-hot ou codificação de rótulos. 
-
-Para a etaoa de modelagem os dados foram divididos em conjuntos de treinamento e teste para treinar os algoritmos de Machine Learning. Os modelos foram avaliados usando métricas como **MAE (Mean Absolute Error)**, **MSE (Mean Squared Error)**, **R² (Coeficiente de Determinação)** e **MAPE (Mean Absolute Percentage Error)** para medir o quão bem os tempos de entrega previstos correspondem aos tempos de entrega reais.
-
-Neste projeto foram utilizados 5 modelos de **regressão** para prever o tempo de entrega com base nos dados pré-processados.
-- Linaer Regression
-- Lightgbm
-- Random Forest Regressor
-- XGBoost
-- CatBoost
-
-Foi realizado um ajuste de **hiperparâmetros com Optuna** para otimizar o desempenho dos modelos que tiveram melhor resultado. 
-
-> O código-fonte está disponível em: [main.ipynb](https://github.com/rrafahenrique/Estudo-de-Caso-Food-Delivery-Time-Prediction/blob/master/main.ipynb)
-
----
 
 > [!IMPORTANT]
 > Na seção "2. Tratamento dos Dados" para ilustatr a localização dos restaurantes e locais de entrega foi usada a biblioteca `plotly.express` para gerar mapas iterativos. 
@@ -43,3 +25,26 @@ Foi realizado um ajuste de **hiperparâmetros com Optuna** para otimizar o desem
 > pip install -r requirements.txt
 >```
 > 
+
+- **Análise Exploratória**: análise dos dados para extração de insights de negócios;
+- **Feature Engineering***: Criação de novas funcionalidades que podem melhorar o desempenho do modelo, como distância entre locais, avaliação dos entregadores e etc.
+- **Codificação de variáveis ​​categóricas**: Converter características categóricas em formato numérico usando técnicas como codificação one-hot ou codificação de rótulos. 
+
+Para a etaoa de modelagem os dados foram divididos em conjuntos de treinamento e teste para treinar os algoritmos de Machine Learning. Os modelos foram avaliados usando métricas como:
+- **MAE (Mean Absolute Error)**, 
+- **MSE (Mean Squared Error)**, 
+- **R² (Coeficiente de Determinação)** e 
+- **MAPE (Mean Absolute Percentage Error)** 
+
+para medir o quão bem os tempos de entrega previstos correspondem aos tempos de entrega reais. Neste projeto foram utilizados 5 modelos de **regressão** para prever o tempo de entrega com base nos dados pré-processados.
+- Linaer Regression
+- Lightgbm
+- Random Forest Regressor
+- XGBoost
+- CatBoost
+
+Foi realizado um ajuste de **hiperparâmetros com Optuna** para otimizar o desempenho dos modelos que tiveram melhor resultado. 
+
+> O código-fonte está disponível em: [main.ipynb](https://github.com/rrafahenrique/Estudo-de-Caso-Food-Delivery-Time-Prediction/blob/master/main.ipynb)
+
+
