@@ -27,7 +27,7 @@ Neste projeto foram utilizados 5 modelos de **regressão** para prever o tempo d
 
 Foi realizado um ajuste de **hiperparâmetros com Optuna** para otimizar o desempenho dos modelos que tiveram melhor resultado. 
 
-> O código-fonte está disponível em: [main.ipynb]()
+> O código-fonte está disponível em: [main.ipynb](https://github.com/rrafahenrique/Estudo-de-Caso-Food-Delivery-Time-Prediction/blob/master/main.ipynb)
 
 ---
 
